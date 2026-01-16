@@ -1,26 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Colors - Spring Meadow Palette */
+  --fairy-tale-dream: #F4C6C3;
+  --fairy-tale-dream-light: #FBE8E6;
+  --fairy-tale-dream-dark: #E8A5A0;
+
+  --sweet-mint: #A8D8B9;
+  --sweet-mint-light: #D4EFE0;
+  --sweet-mint-dark: #7BC492;
+
+  --dewpoint: #B5E2E8;
+  --dewpoint-light: #E5F5F8;
+  --dewpoint-dark: #8ACDD6;
+
+  /* Neutrals */
+  --background: #FEFEFE;
+  --background-secondary: #F8FAFB;
+  --foreground: #4A4A4A;
+  --foreground-secondary: #7A7A7A;
+  --foreground-muted: #9CA3AF;
+
+  /* Shadows */
+  --card-shadow: 0 2px 12px rgba(180, 200, 210, 0.15);
+  --card-shadow-hover: 0 4px 20px rgba(180, 200, 210, 0.25);
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Nunito', sans-serif;
+  --font-display: 'Quicksand', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Nunito', sans-serif;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dewpoint);
+  border-radius: var(--radius-full);
+}
+
+/* Font utilities */
+.font-display {
+  font-family: 'Quicksand', sans-serif;
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes ring-progress {
+  from { stroke-dashoffset: 283; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* Safe area padding for PWA */
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 80px);
+}
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Touch-friendly tap targets */
+.tap-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-fade-in,
+  .animate-pulse-soft {
+    animation: none;
+  }
 }
