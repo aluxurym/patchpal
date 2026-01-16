@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json.schemastore.org/wrangler",
+  "name": "patchpal",
+  "compatibility_date": "2026-01-16",
+  "assets": {
+    "directory": "./out"
+  }
+}
