@@ -10,7 +10,13 @@ const withPWA = withPWAInit({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // Use webpack for PWA compatibility
+  // Static export for Cloudflare Pages deployment
+  output: "export",
+  // Disable image optimization (not supported in static export)
+  images: {
+    unoptimized: true,
+  },
+  // Empty turbopack config to silence warning
   turbopack: {},
 };
 
