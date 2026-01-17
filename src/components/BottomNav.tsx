@@ -3,12 +3,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Calendar, PenSquare, BarChart3, Settings } from 'lucide-react';
+import { Home, Calendar, BarChart3, Settings } from 'lucide-react';
 
 const navItems = [
   { href: '/', icon: Home, label: 'Home' },
   { href: '/calendar', icon: Calendar, label: 'Calendar' },
-  { href: '/log', icon: PenSquare, label: 'Log' },
   { href: '/stats', icon: BarChart3, label: 'Stats' },
   { href: '/settings', icon: Settings, label: 'Settings' }
 ];
@@ -17,15 +16,8 @@ export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav
-      className="
-        fixed bottom-0 left-0 right-0 z-40
-        bg-white/90 backdrop-blur-lg
-        border-t border-gray-100
-        safe-area-inset-bottom
-      "
-    >
-      <div className="flex items-center justify-around h-16 max-w-lg mx-auto px-2">
+    <nav className="bottom-nav-floating">
+      <div className="flex items-center justify-around h-14 max-w-md mx-auto px-4">
         {navItems.map(({ href, icon: Icon, label }) => {
           const isActive = pathname === href;
 
@@ -35,7 +27,7 @@ export function BottomNav() {
               href={href}
               className={`
                 flex flex-col items-center justify-center
-                w-16 h-14 rounded-xl
+                w-14 h-12 rounded-xl
                 transition-all duration-200
                 tap-target
                 ${isActive
