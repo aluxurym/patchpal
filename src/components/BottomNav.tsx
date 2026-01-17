@@ -17,7 +17,7 @@ export function BottomNav() {
 
   return (
     <nav className="bottom-nav-floating">
-      <div className="flex items-center justify-around h-14 max-w-md mx-auto px-4">
+      <div className="flex items-center justify-center gap-2 h-16 px-4">
         {navItems.map(({ href, icon: Icon, label }) => {
           const isActive = pathname === href;
 
@@ -26,31 +26,25 @@ export function BottomNav() {
               key={href}
               href={href}
               className={`
-                flex flex-col items-center justify-center
-                w-14 h-12 rounded-xl
-                transition-all duration-200
+                flex items-center justify-center
+                rounded-full transition-all duration-300 ease-out
                 tap-target
                 ${isActive
-                  ? 'text-[var(--fairy-tale-dream-dark)]'
-                  : 'text-[var(--foreground-muted)] hover:text-[var(--foreground-secondary)]'
+                  ? 'bg-[var(--fairy-tale-dream-light)] text-[var(--fairy-tale-dream-dark)] px-4 py-2.5 gap-2'
+                  : 'text-[var(--foreground-muted)] hover:text-[var(--foreground-secondary)] hover:bg-[var(--background-secondary)] p-2.5'
                 }
               `}
             >
-              <div
-                className={`
-                  p-1.5 rounded-lg transition-colors duration-200
-                  ${isActive ? 'bg-[var(--fairy-tale-dream-light)]' : ''}
-                `}
-              >
-                <Icon
-                  className={`w-5 h-5 transition-transform duration-200 ${isActive ? 'scale-110' : ''}`}
-                  strokeWidth={isActive ? 2.5 : 2}
-                  aria-hidden="true"
-                />
-              </div>
-              <span className={`text-[10px] mt-0.5 font-medium ${isActive ? 'font-semibold' : ''}`}>
-                {label}
-              </span>
+              <Icon
+                className={`w-[22px] h-[22px] transition-transform duration-200 ${isActive ? 'scale-105' : ''}`}
+                strokeWidth={isActive ? 2.5 : 2}
+                aria-hidden="true"
+              />
+              {isActive && (
+                <span className="text-sm font-semibold whitespace-nowrap animate-nav-label">
+                  {label}
+                </span>
+              )}
             </Link>
           );
         })}
